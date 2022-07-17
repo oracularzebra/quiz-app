@@ -1,7 +1,7 @@
 const Header = ()=>{
 
     return (
-        <div className="bg-blue-500 w-screen h-full">
+        <div className="bg-blue-500 w-screen">
             <header>
                 <h1 className="font-semibold text-center text-4xl">
                     Quizee
