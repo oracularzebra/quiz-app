@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -15,7 +16,7 @@
     "start": "react-scripts start & npm run watch:css",
     "build": "react-scripts build & npm run build:css",
     "watch:css": "postcss src/tailwind.css -o output.css --watch",
-    "build:css":"postcss src/tailwind.css -o output.css",
+    "build:css": "postcss src/tailwind.css -o output.css",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

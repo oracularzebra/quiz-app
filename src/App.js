@@ -2,7 +2,7 @@
 function App() {
   return (
     <div className="m-1">
-      This is a plane page
+      This is the file
     </div>
   );
 }
