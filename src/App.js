@@ -1,8 +1,13 @@
+import { Routes, Route } from "react-router-dom";
+import Header from "./Components/header";
 
 function App() {
   return (
-    <div className="m-1">
-      This is the file
+    <div>
+      <Routes>
+        <Route path="/" element={<Header/>}>
+        </Route>
+      </Routes>
     </div>
   );
 }
