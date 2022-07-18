@@ -2,7 +2,7 @@ const Footer = ()=>{
 
     return (
         <div className="bg-blue-500 w-screen">
-            ths is footer
+            <h1 className="text-xl text-center">Implemented with ❤️ by Kartikey</h1>
         </div>
     )
 
