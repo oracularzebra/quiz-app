@@ -6,35 +6,72 @@ const Home = ()=>{
     const navigate = useNavigate();
     const titles = [
         {
-            itemNo:0,
+            category: 1,
             itemName:'General Knowledge',
             difficulty:['Easy', 'Medium', 'Hard']
         },
         {
             itemNo:1,
             itemName:'Entertainment',
-            subItems:['Books', 'Movies', 'Music', 'Television', 'Cartoons', 'Animation', 'Video Games'],
+            subItems:[{
+                category: 10,
+                itemName: 'Books'
+            },
+            {
+                category: 11,
+                itemName: 'Movies'
+            },
+            {
+                category: 12,
+                itemName: 'Music'
+            },
+            {
+                category: 14,
+                itemName: 'Television'
+            },
+            {
+                category: 32,
+                itemName: 'Cartoons & Animation'
+            },
+            {
+                category: 15,
+                itemName: 'Video Games'
+            }
+        ],
             difficulty:['Easy', 'Medium', 'Hard']
 
         },
         {
-            itemNo:2,
+            category: 9,
             itemName:'Science',
-            subItems:['Maths', 'Gadgets', 'Computers'],
+            subItems:[
+                {
+                    category: 19,
+                    itemName: 'Maths'
+                },
+                {
+                    category: 30,
+                    itemName: 'Gadgets'
+                },
+                {
+                    category: 18,
+                    itemName: 'Computers'
+                },
+            ],
             difficulty:['Easy', 'Medium', 'Hard']
         },
         {
-            itemNo:3,
+            category: 26,
             itemName:'Celebrities',
             difficulty:['Easy', 'Medium', 'Hard']
         },
         {
-            itemNo:4,
+            itemNo:27,
             itemName:'Animal',
             difficulty:['Easy', 'Medium', 'Hard']
         },
         {
-            itemNo:5,
+            itemNo:28,
             itemName:'Vehicle',
             difficulty:['Easy', 'Medium', 'Hard']
         }
@@ -58,9 +95,9 @@ const Home = ()=>{
                                 {obj.subItems.map((subObj, index) => (
                                     <label className="border-emerald-300 border-2 p-1 rounded-md m-1" key={index}>
                                         <input type={'radio'} name='title' onChange={(event)=>{
-                                            setCategory(event.currentTarget.parentNode.textContent);
+                                            setCategory(subObj.category);
                                         }}/>
-                                        {subObj}
+                                        {subObj.itemName}
                                     </label>
                                 ))}
                             </div>
@@ -83,18 +120,10 @@ const Home = ()=>{
                     {
                         <div>
                             <button className="border-2 rounded-md m-1 border-indigo-500" onClick={()=>{
-                                // if(category && difficulty){
-                                //     if(!obj.subItems){
-                                        
-                                //         navigate(`${obj.itemName}/${difficulty}`);
-                                //     }else{                                
-                                //         navigate(`${category}/${difficulty}`);
-                                //     }
-                                // }
                                 obj.subItems ?
                                     category && difficulty && navigate(`${category}/${difficulty}`)
                                 :
-                                    difficulty && navigate(`${obj.itemName}/${difficulty}`)
+                                    difficulty && navigate(`${obj.category}/${difficulty}`)
  
                             }}>Take Test</button>
                         </div>
