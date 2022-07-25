@@ -6,7 +6,8 @@ const Home = ()=>{
     const navigate = useNavigate();
     const titles = [
         {
-            category: 1,
+            category: 9,
+            itemNo: 0,
             itemName:'General Knowledge',
             difficulty:['Easy', 'Medium', 'Hard']
         },
@@ -43,6 +44,7 @@ const Home = ()=>{
         },
         {
             category: 9,
+            itemNo: 2,
             itemName:'Science',
             subItems:[
                 {
@@ -62,16 +64,19 @@ const Home = ()=>{
         },
         {
             category: 26,
+            itemNo: 3,
             itemName:'Celebrities',
             difficulty:['Easy', 'Medium', 'Hard']
         },
         {
-            itemNo:27,
+            category:27,
+            itemNo: 4,
             itemName:'Animal',
             difficulty:['Easy', 'Medium', 'Hard']
         },
         {
-            itemNo:28,
+            category:28,
+            itemNo: 5,
             itemName:'Vehicle',
             difficulty:['Easy', 'Medium', 'Hard']
         }
@@ -94,7 +99,7 @@ const Home = ()=>{
                             <div className="flex flex-wrap">
                                 {obj.subItems.map((subObj, index) => (
                                     <label className="border-emerald-300 border-2 p-1 rounded-md m-1" key={index}>
-                                        <input type={'radio'} name='title' onChange={(event)=>{
+                                        <input type={'radio'} name='title' onChange={()=>{
                                             setCategory(subObj.category);
                                         }}/>
                                         {subObj.itemName}
@@ -121,9 +126,9 @@ const Home = ()=>{
                         <div>
                             <button className="border-2 rounded-md m-1 border-indigo-500" onClick={()=>{
                                 obj.subItems ?
-                                    category && difficulty && navigate(`${category}/${difficulty}`)
+                                    category && difficulty && navigate(`${category}/${difficulty.toLowerCase()}`)
                                 :
-                                    difficulty && navigate(`${obj.category}/${difficulty}`)
+                                    difficulty && navigate(`${obj.category}/${difficulty.toLowerCase()}`)
  
                             }}>Take Test</button>
                         </div>
