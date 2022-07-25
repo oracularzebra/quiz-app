@@ -10,7 +10,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
-        <Route path="/:categoryName/:difficultyLevel" element={<TitleCard/>}></Route>
+        <Route path="/:category/:difficultyLevel" element={<TitleCard/>}></Route>
       </Routes>
       <Footer/>
     </div>
