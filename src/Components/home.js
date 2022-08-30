@@ -85,7 +85,7 @@ const Home = ()=>{
     const [difficulty, setDifficulty] = useState(null);
    
     return(
-    <div className="bg-red-300 flex flex-wrap justify-around rounded-md m-2 shadow-2xl shadow-slate-600">
+    <div className="bg-red-300 order-2 flex flex-wrap justify-around rounded-md m-2 shadow-2xl shadow-slate-600">
         {
             titles.map(obj => (
                 <div className="bg-white rounded-md md:p-2 basis-0 grow shrink m-2" key={obj.itemNo}>

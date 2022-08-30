@@ -6,7 +6,7 @@ import TitleCard from "./Components/AbstractCard";
 
 function App() {
   return (
-    <div className="grid h-full bg-slate-300">
+    <div className="grid h-full flex bg-slate-300">
       <Header/>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
