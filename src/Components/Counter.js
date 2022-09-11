@@ -9,7 +9,7 @@ const Counter=({testTime})=>{
             //show the result
         }
         else if(counter.sec == 0){
-            setCounter({min:counter.min-1, sec:counter.sec});
+            setCounter({min:counter.min-1, sec:59});
         }
         else{
             setCounter({min:counter.min, sec:counter.sec-1});
