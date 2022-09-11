@@ -26,7 +26,7 @@ const TitleCard = ()=>{
                         console.log(quesArr);
                         setCurrQuestion(quesArr[currQuesIndex]); 
                         Promise.all((Array.from({length:quesArr.length}).map((_, index)=>{
-                            let pictures = getPhoto(decodeURI(quesArr[index].question)); 
+                            let pictures = getPhoto(decodeURIComponent(quesArr[index].question)); 
                             return pictures;
                         }))).then((pictures)=>{console.log(pictures); setPictureLoading(false); setPicture(pictures)});
                         setCurrOptions([...quesArr[currQuesIndex].incorrect_answers, quesArr[currQuesIndex].correct_answer]); 
@@ -52,10 +52,7 @@ const TitleCard = ()=>{
     }, [currQuesIndex]);
 
     return (
-        <div className="bg-white h-screen">
-            {/* {questions.map((question)=>(
-                <div>{question.question}</div>
-            ))} */}
+        <div className="bg-white sm:h-full">
             {!questionsLoading && 
                 //This will have category on the top
                 <div className="md:ml-20 md:mr-20">
