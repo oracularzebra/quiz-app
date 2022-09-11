@@ -63,7 +63,7 @@ const TitleCard = ()=>{
                     <h2 className="md:font-medium text-center md:text-2xl mt-3">{decodeURIComponent(currQuestion.category)+": "+decodeURIComponent(currQuestion.difficulty.toUpperCase())}</h2>
                     <hr></hr>
                     <div className="grid justify-center font-semibold">
-                        <Counter testTime={{min:10, sec:59}}></Counter>
+                        <Counter testTime={{min:10, sec:0}}></Counter>
                     </div>
                     <div className="flex justify-around">
                             {questions.map((_, index)=>{
