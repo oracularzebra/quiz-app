@@ -9,6 +9,7 @@ import Picture from "./QuestionPage/Picture";
 import Question from "./QuestionPage/Question";
 import Options from "./QuestionPage/Options";
 import NextPrevBtn from "./QuestionPage/NextAndPrevButtons";
+import Result from "./ResultPage/Results";
 
 const TitleCard = ()=>{
 
@@ -80,7 +81,10 @@ const TitleCard = ()=>{
                 </div>
             }
             {/* Here its time's up */}
-            
+            {
+                timeUp && 
+                <Result></Result>
+            }
         </div>
     )
 }
