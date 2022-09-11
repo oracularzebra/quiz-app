@@ -23,7 +23,7 @@ const Counter=({testTime, setEnd})=>{
     });
 
     return (
-        <div>
+        <div className="grid justify-center font-semibold">
             {counter.min+":"+ counter.sec}
         </div>
     )
