@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-const Counter=({testTime})=>{
+const Counter=({testTime, setEnd})=>{
 
     const [counter, setCounter] = useState(testTime);
 
@@ -7,6 +7,7 @@ const Counter=({testTime})=>{
 
         if(counter.min === 0 && counter.sec === 0){
             //show the result
+            setEnd(true);
         }
         else if(counter.sec == 0){
             setCounter({min:counter.min-1, sec:59});

@@ -16,6 +16,7 @@ const TitleCard = ()=>{
     const [currQuesIndex, setCurrQuesIndex] = useState(0);
     const [picture, setPicture] = useState(null);
     const [pictureLoading, setPictureLoading] = useState(true);
+    const [timeUp, setTimeUp] = useState(false);
 
     useEffect(()=>{
         const getQues = async()=>{
@@ -53,14 +54,14 @@ const TitleCard = ()=>{
 
     return (
         <div className="bg-white sm:h-full">
-            {!questionsLoading && 
+            {!questionsLoading && !timeUp && 
                 //This will have category on the top
                 <div className="md:ml-20 md:mr-20">
                     {/* We will show the category */}
                     <h2 className="md:font-medium text-center md:text-2xl mt-3">{decodeURIComponent(currQuestion.category)+": "+decodeURIComponent(currQuestion.difficulty.toUpperCase())}</h2>
                     <hr></hr>
                     <div className="grid justify-center font-semibold">
-                        <Counter testTime={{min:10, sec:0}}></Counter>
+                        <Counter setEnd={setTimeUp} testTime={{min:10, sec:0}}></Counter>
                     </div>
                     <div className="flex justify-around">
                             {questions.map((_, index)=>{
@@ -90,6 +91,8 @@ const TitleCard = ()=>{
                     </div>
                 </div>
             }
+            {/* Here its time's up */}
+            
         </div>
     )
 }
