@@ -6,7 +6,7 @@ import TitleCard from "./Components/AbstractCard";
 
 function App() {
   return (
-    <div>
+    <div className="overflow-scroll">
       <Header/>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
