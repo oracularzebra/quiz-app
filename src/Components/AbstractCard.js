@@ -18,11 +18,12 @@ const TitleCard = ()=>{
     const [questionsLoading, setQuestionsLoading] = useState(true);
     const [currQuestion, setCurrQuestion] = useState(null);
     const [currOptions, setCurrOptions] = useState(null);
-    // const [oneOfTheOptionsSelected, setOneOfTheOptionsSelected] = useState(false);
     const [currQuesIndex, setCurrQuesIndex] = useState(0);
     const [picture, setPicture] = useState(null);
     const [pictureLoading, setPictureLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false);
+    const [correctOptions, setCorrectOptions] = useState(null);
+    const [markedOptions, setMarkedOptions] = useState(null);
 
     useEffect(()=>{
         const getQues = async()=>{
@@ -30,11 +31,16 @@ const TitleCard = ()=>{
                 .then((questions)=>questions.results)
                     .then((quesArr) =>{
                         setQuestions(quesArr);
+                        setMarkedOptions(Array.from({length:quesArr.length}));
                         setCurrQuestion(quesArr[currQuesIndex]); 
                         Promise.all((Array.from({length:quesArr.length}).map((_, index)=>{
                             let pictures = getPhoto(decodeURIComponent(quesArr[index].question)); 
                             return pictures;
                         }))).then((pictures)=>{console.log(pictures); setPictureLoading(false); setPicture(pictures)});
+                        const correct_answers = quesArr.map(ques => decodeURIComponent(ques.correct_answer));
+                        console.log(correct_answers);                        setCorrectOptions(quesArr[currQuesIndex].correct_answer);
+
+                        setCorrectOptions(quesArr.map(ques => decodeURIComponent(ques.correct_answer)));
                         setCurrOptions([...quesArr[currQuesIndex].incorrect_answers, quesArr[currQuesIndex].correct_answer]); 
                         setQuestionsLoading(false)
                     }
@@ -60,30 +66,23 @@ const TitleCard = ()=>{
     return (
         <div className="bg-white sm:h-full">
             {!questionsLoading && !timeUp && 
-                //This will have category on the top
                 <div className="md:ml-20 md:mr-20">
-                    {/* We will show the category */}
                     <CategoryAndDifficultyHeading category={currQuestion.category} difficulty={difficultyLevel}></CategoryAndDifficultyHeading>
                     <hr></hr>
                     <Counter setEnd={setTimeUp} testTime={{min:10, sec:0}}></Counter>
-                    {/* Here we will show the circles with the questions number */}
                     <QuesNoHeader questions={questions} setCurrQuesIndex={setCurrQuesIndex} currQuesIndex={currQuesIndex}></QuesNoHeader>
                     <hr></hr>
-                    {/* Here we will have the picture on the left side
-                    the quesion on the top right and options below it */}
                     <div className="md:grid md:grid-cols-2 md:grid-rows-3 md:justify-center md:items-start">
-                        {/* Here we will have the question card */}
                         <Picture pictures={picture} pictureLoading={pictureLoading} currQuesIndex={currQuesIndex}></Picture>
                         <Question currQuesIndex={currQuesIndex} currQuestion={currQuestion}></Question>
-                        <Options currOptions={currOptions}></Options>
-                        <NextPrevBtn currQuesIndex={currQuesIndex} questions={questions} setCurrQuesIndex={setCurrQuesIndex}></NextPrevBtn>
+                        <Options currOptions={currOptions} markedOptions={markedOptions} quesIndex={currQuesIndex} setMarkedOptions={setMarkedOptions}></Options>
+                        <NextPrevBtn currQuesIndex={currQuesIndex} setEndTest={setTimeUp} questions={questions} setCurrQuesIndex={setCurrQuesIndex}></NextPrevBtn>
                     </div>
                 </div>
             }
-            {/* Here its time's up */}
             {
                 timeUp && 
-                <Result></Result>
+                <Result correctOptions={correctOptions} markedOptions={markedOptions}></Result>
             }
         </div>
     )
