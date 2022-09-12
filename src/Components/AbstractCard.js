@@ -22,9 +22,17 @@ const TitleCard = ()=>{
     const [picture, setPicture] = useState(null);
     const [pictureLoading, setPictureLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false);
-    const [correctOptions, setCorrectOptions] = useState(null);
-    const [markedOptions, setMarkedOptions] = useState(null);
+    const [correctOptions, setCorrectOptions] = useState([]);
+    const [markedOptions, setMarkedOptions] = useState([]);
+    const [score, setScore] = useState(0);
 
+    useEffect(()=>{
+
+        for(let i=0;i< markedOptions.length; i++){
+            if(markedOptions[i] == correctOptions[i]) setScore(score+1);
+        }
+    }, [markedOptions])
+    
     useEffect(()=>{
         const getQues = async()=>{
             getQuestions(category, difficultyLevel)
@@ -82,7 +90,7 @@ const TitleCard = ()=>{
             }
             {
                 timeUp && 
-                <Result correctOptions={correctOptions} markedOptions={markedOptions}></Result>
+                <Result score={score} ></Result>
             }
         </div>
     )
