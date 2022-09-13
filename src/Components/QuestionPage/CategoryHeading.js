@@ -1,7 +1,7 @@
 const CategoryAndDifficultyHeading = ({category, difficulty})=>{
 
     return(
-        <h2 className="md:font-medium text-center md:text-2xl mt-3">{decodeURIComponent(category)+": "+decodeURIComponent(difficulty.toUpperCase())}</h2>
+        <h2 className="md:font-medium text-center md:text-2xl mt-3">{": "+decodeURIComponent(difficulty.toUpperCase())}</h2>
     )
 
 
