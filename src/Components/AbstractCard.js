@@ -21,20 +21,23 @@ const TitleCard = ()=>{
     const [picture, setPicture] = useState(null);
     const [pictureLoading, setPictureLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false);
-    const [markedOptions, setMarkedOptions] = useState([]);
+    const [markedOptions, setMarkedOptions] = useState();
     const [score, setScore] = useState(0);
     const [options, setOptions] = useState(null);
+    const [currCategory, setCurrCategory] = useState(null);
 
     useEffect(()=>{
         const getQues = async()=>{
             getQuestions(category, difficultyLevel)
-                .then(result =>{ 
-                    setQuestions(result.questions);
-                    setPictures(result.questions);
-                    setOptions(Array.from({length:result.correct_answers.length}).map((_,index)=>insertAtRandom(result.correct_answers[index],result.incorrect_answers[index])));
+                .then(({questions, incorrect_answers, correct_answers}) =>{
+                    setQuestions(questions);
+                    setPictures(questions);
+                    setOptions(Array.from({length:correct_answers.length}).map((_,index)=>insertAtRandom(correct_answers[index],incorrect_answers[index])));
                     setQuestionsLoading(false);
+                    setMarkedOptions(Array.from({length:10}));
                 });
         }
+        findCategory();
         setQuestionsLoading(true);
         setPictureLoading(true);
         getQues();
@@ -42,7 +45,7 @@ const TitleCard = ()=>{
 
     function setPictures(questions){
         Promise.all((Array.from({length:questions.length}).map((_, index)=>{
-                            let pictures = getPhoto(decodeURIComponent(questions[index])); 
+                            let pictures = getPhoto(questions[index]); 
                             return pictures;
                         }))).then((pictures)=>{console.log(pictures); setPictureLoading(false); setPicture(pictures)});
     }
@@ -51,12 +54,23 @@ const TitleCard = ()=>{
         let randomLocation = Math.floor(Math.random()*length);
         return [...arr.slice(0, randomLocation), data, ...arr.slice(randomLocation)];
     }
-
+    function findCategory(){
+        
+        for(let i=0;i<titles.length; i++){
+            if(titles[i].category === undefined){
+                console.log("when title don't have a category");
+                for(let j=0;j<titles[i].subItems.length; j++){
+                    if(titles[i].subItems[j].category.toString() === category){ console.log(titles[i].itemName);setCurrCategory(titles[i].subItems[j].itemName); return;}
+                }
+            }
+            else if(titles[i].category.toString() === category) {console.log(titles[i].category); setCurrCategory(titles[i].itemName); return;}
+        }
+    }
     return (
         <div className="bg-white sm:h-full">
             {!questionsLoading && !timeUp && 
                 <div className="md:ml-20 md:mr-20">
-                    <CategoryAndDifficultyHeading category={titles.find((title)=>{if(title.category==category)return title.itemName})} difficulty={difficultyLevel}></CategoryAndDifficultyHeading>
+                    <CategoryAndDifficultyHeading category={currCategory} difficulty={difficultyLevel}></CategoryAndDifficultyHeading>
                     <hr></hr>
                     <Counter setEnd={setTimeUp} testTime={{min:10, sec:0}}></Counter>
                     <QuesNoHeader questions={questions} setCurrQuesIndex={setCurrQuesIndex} currQuesIndex={currQuesIndex}></QuesNoHeader>
