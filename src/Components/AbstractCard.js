@@ -26,12 +26,6 @@ const TitleCard = ()=>{
     const [markedOptions, setMarkedOptions] = useState([]);
     const [score, setScore] = useState(0);
 
-    //We can replace the correctOptions and currOptions with an array containing objects having correct 
-    //and incorrect options. By his way we can also remove the currOptions
-    const [options, setOptions] = useState([]);
-
-        
-
     useEffect(()=>{
 
         for(let i=0;i< markedOptions.length; i++){
