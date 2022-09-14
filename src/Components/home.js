@@ -1,13 +1,19 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect } from "react";
 import titles from "./titles";
-const Home = ()=>{
-    
+
+const Home = ({UUID,category, difficulty,isLoggedIn, setCategory, setDifficulty})=>{
+
     const navigate = useNavigate();
-    const [category, setCategory] = useState(null); 
-    const [difficulty, setDifficulty] = useState(null);
-   
+    useEffect(()=>{
+        if(UUID === null || !isLoggedIn){
+            navigate("/");
+        }
+    }, []);
+    
     return(
+    <div className="homePage">
+        <h2 className="text-center">Hey! {UUID}</h2>
     <div className="bg-slate-300 lg:bg-slate-200 order-2 flex flex-wrap justify-around rounded-md m-2 shadow-2xl shadow-slate-600">
         {
             titles.map(obj => (
@@ -59,6 +65,7 @@ const Home = ()=>{
                 </div>
             ))
         }
+    </div>
     </div>
     )
 }
