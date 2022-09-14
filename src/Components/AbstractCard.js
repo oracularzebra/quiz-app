@@ -11,6 +11,8 @@ import Options from "./QuestionPage/Options";
 import NextPrevBtn from "./QuestionPage/NextAndPrevButtons";
 import Result from "./ResultPage/Results";
 import titles from "./titles";
+import app from "./firebaseIntegration";
+import { get, getDatabase, ref, set } from "firebase/database";
 
 const TitleCard = ()=>{
 
@@ -21,15 +23,19 @@ const TitleCard = ()=>{
     const [picture, setPicture] = useState(null);
     const [pictureLoading, setPictureLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false);
-    const [markedOptions, setMarkedOptions] = useState();
+    const [markedOptions, setMarkedOptions] = useState(null);
     const [score, setScore] = useState(0);
     const [options, setOptions] = useState(null);
     const [currCategory, setCurrCategory] = useState(null);
+    const [uuid, setuuid] = useState(null);
 
     useEffect(()=>{
         const getQues = async()=>{
             getQuestions(category, difficultyLevel)
                 .then(({questions, incorrect_answers, correct_answers}) =>{
+                    const uuid = crypto.randomUUID();
+                    setuuid(uuid);
+                    writeUserData(getDatabase(app), uuid, correct_answers);
                     setQuestions(questions);
                     setPictures(questions);
                     setOptions(Array.from({length:correct_answers.length}).map((_,index)=>insertAtRandom(correct_answers[index],incorrect_answers[index])));
@@ -43,11 +49,18 @@ const TitleCard = ()=>{
         getQues();
     }, []);
 
+    function writeUserData(db,userId, correct_answers) {
+        set(ref(db, 'users/' + userId), {
+            correct_answers:correct_answers
+        });
+    }
+    function readUserData(db, userId){
+    }
     function setPictures(questions){
         Promise.all((Array.from({length:questions.length}).map((_, index)=>{
-                            let pictures = getPhoto(questions[index]); 
-                            return pictures;
-                        }))).then((pictures)=>{console.log(pictures); setPictureLoading(false); setPicture(pictures)});
+            let pictures = getPhoto(decodeURIComponent(questions[index])); 
+            return pictures;
+        }))).then((pictures)=>{console.log(pictures); setPictureLoading(false); setPicture(pictures)});
     }
     function insertAtRandom(data, arr=[]){
         let length = arr.length;
@@ -79,7 +92,7 @@ const TitleCard = ()=>{
                         <Picture pictures={picture} pictureLoading={pictureLoading} currQuesIndex={currQuesIndex}></Picture>
                         <Question currQuesIndex={currQuesIndex} currQuestion={questions[currQuesIndex]}></Question>
                         <Options currOptions={options[currQuesIndex]} markedOptions={markedOptions} quesIndex={currQuesIndex} setMarkedOptions={setMarkedOptions}></Options>
-                        <NextPrevBtn currQuesIndex={currQuesIndex} setEndTest={setTimeUp} setCurrQuesIndex={setCurrQuesIndex}></NextPrevBtn>
+                        <NextPrevBtn questionsLength={questions.length} currQuesIndex={currQuesIndex} setEndTest={setTimeUp} setCurrQuesIndex={setCurrQuesIndex}></NextPrevBtn>
                     </div>
                 </div>
             }
