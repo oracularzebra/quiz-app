@@ -19,21 +19,28 @@ function App() {
 
   useEffect(()=>{
       //We will retrieve all the data of the user
-      if(UUID != null){
+      if(UUID != null && !isNewUser){
         function checkIfUUIDExists(){
-        const dbRef = ref(database);
-        get(child(dbRef, `/users/${UUID}`)).then(snapshot=>{
-          if(snapshot.exists()){
-            console.log('exists');
-            setLoggedIn(true);
-          }
-          else{
-            console.log("don't exist");
-            setLoggedIn(false);
-          }
-        })
+          const dbRef = ref(database);
+          get(child(dbRef, `/users/${UUID}`)).then(snapshot=>{
+            if(snapshot.exists()){
+              setLoggedIn(true);
+            }
+            else{
+              setLoggedIn(false);
+            }
+          })
       }
       checkIfUUIDExists();
+    }
+    else if(isNewUser){
+      function addNewUser(){
+        set(ref(database, "users/"+UUID), {
+          first_login_date:`${new Date()}`
+        })
+        setLoggedIn(true);
+      }
+      addNewUser();
     }
   }, [UUID]);
 
