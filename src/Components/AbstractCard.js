@@ -11,6 +11,8 @@ import Options from "./QuestionPage/Options";
 import NextPrevBtn from "./QuestionPage/NextAndPrevButtons";
 import Result from "./ResultPage/Results";
 import titles from "./titles";
+import { getDatabase, update, ref } from "firebase/database";
+import app from "./firebaseIntegration";
 
 const TitleCard = ({UUID})=>{
 
@@ -25,6 +27,7 @@ const TitleCard = ({UUID})=>{
     const [score, setScore] = useState(0);
     const [options, setOptions] = useState(null);
     const [currCategory, setCurrCategory] = useState(null);
+    const date = new Date();
 
     const nav = useNavigate();
     useEffect(()=>{
@@ -35,20 +38,33 @@ const TitleCard = ({UUID})=>{
             getQuestions(category, difficultyLevel)
                 .then(({questions, incorrect_answers, correct_answers}) =>{
                     // writeUserData(getDatabase(app), uuid, correct_answers);
+                    updateToFireStore(questions, incorrect_answers, correct_answers);
                     setQuestions(questions);
                     setPictures(questions);
                     setOptions(Array.from({length:correct_answers.length}).map((_,index)=>insertAtRandom(correct_answers[index],incorrect_answers[index])));
                     setQuestionsLoading(false);
                     setMarkedOptions(Array.from({length:10}));
                 });
-        }
-        findCategory();
+            }
         setQuestionsLoading(true);
         setPictureLoading(true);
         getQues();
     }, []);
 
-    
+    function updateToFireStore(questions, incorrect_answers, correct_answers){
+        const database = getDatabase(app);
+        const dbRef = ref(database, "users/"+UUID);
+        update(dbRef,
+            {
+                [date]:{questions:questions,
+                correct_answers:correct_answers,
+                incorrect_answers:incorrect_answers,
+                category:findCategory(),
+                difficulty:difficultyLevel
+            }
+            }
+            );
+    } 
     function setPictures(questions){
         Promise.all((Array.from({length:questions.length}).map((_, index)=>{
             let pictures = getPhoto(decodeURIComponent(questions[index])); 
@@ -66,10 +82,10 @@ const TitleCard = ({UUID})=>{
             if(titles[i].category === undefined){
                 console.log("when title don't have a category");
                 for(let j=0;j<titles[i].subItems.length; j++){
-                    if(titles[i].subItems[j].category.toString() === category){ console.log(titles[i].itemName);setCurrCategory(titles[i].subItems[j].itemName); return;}
+                    if(titles[i].subItems[j].category.toString() === category){ setCurrCategory(titles[i].subItems[j].itemName); return titles[i].subItems[j].itemName;}
                 }
             }
-            else if(titles[i].category.toString() === category) {console.log(titles[i].category); setCurrCategory(titles[i].itemName); return;}
+            else if(titles[i].category.toString() === category) { setCurrCategory(titles[i].itemName); return titles[i].itemName;}
         }
     }
     return (
