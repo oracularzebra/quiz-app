@@ -1,6 +1,6 @@
 import Counter from "./Counter";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import getPhoto from "./getPhotos";
 import getQuestions from "./getQuestionsIncorrectAnswersAndCorrectAnswer";
 import QuesNoHeader from "./QuestionPage/QuestionNumberHeader";
@@ -11,10 +11,8 @@ import Options from "./QuestionPage/Options";
 import NextPrevBtn from "./QuestionPage/NextAndPrevButtons";
 import Result from "./ResultPage/Results";
 import titles from "./titles";
-import app from "./firebaseIntegration";
-import { get, getDatabase, ref, set } from "firebase/database";
 
-const TitleCard = ()=>{
+const TitleCard = ({UUID})=>{
 
     const {category, difficultyLevel} = useParams();
     const [questions, setQuestions] = useState(null);
@@ -27,15 +25,16 @@ const TitleCard = ()=>{
     const [score, setScore] = useState(0);
     const [options, setOptions] = useState(null);
     const [currCategory, setCurrCategory] = useState(null);
-    const [uuid, setuuid] = useState(null);
 
+    const nav = useNavigate();
     useEffect(()=>{
+        if(UUID == null){
+            nav('/');
+        }
         const getQues = async()=>{
             getQuestions(category, difficultyLevel)
                 .then(({questions, incorrect_answers, correct_answers}) =>{
-                    const uuid = crypto.randomUUID();
-                    setuuid(uuid);
-                    writeUserData(getDatabase(app), uuid, correct_answers);
+                    // writeUserData(getDatabase(app), uuid, correct_answers);
                     setQuestions(questions);
                     setPictures(questions);
                     setOptions(Array.from({length:correct_answers.length}).map((_,index)=>insertAtRandom(correct_answers[index],incorrect_answers[index])));
@@ -49,13 +48,7 @@ const TitleCard = ()=>{
         getQues();
     }, []);
 
-    function writeUserData(db,userId, correct_answers) {
-        set(ref(db, 'users/' + userId), {
-            correct_answers:correct_answers
-        });
-    }
-    function readUserData(db, userId){
-    }
+    
     function setPictures(questions){
         Promise.all((Array.from({length:questions.length}).map((_, index)=>{
             let pictures = getPhoto(decodeURIComponent(questions[index])); 
