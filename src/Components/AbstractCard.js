@@ -29,6 +29,7 @@ const TitleCard = ({UUID})=>{
     const [currCategory, setCurrCategory] = useState(null);
     const [date, setDate] = useState(new Date());
     const database = getDatabase(app);
+    const [currSelectedOption, setCurrSelectedOption] = useState(null);
 
     const nav = useNavigate();
     useEffect(()=>{
@@ -39,12 +40,12 @@ const TitleCard = ({UUID})=>{
             getQuestions(category, difficultyLevel)
                 .then(({questions, incorrect_answers, correct_answers}) =>{
                     // writeUserData(getDatabase(app), uuid, correct_answers);
-                    updateToFireStore(questions, incorrect_answers, correct_answers);
+                    updateToFireStore(questions, incorrect_answers, correct_answers, Array.from({length:questions.length}).map(()=>"undefined"));
                     setQuestions(questions);
                     setPictures(questions);
                     setOptions(Array.from({length:correct_answers.length}).map((_,index)=>insertAtRandom(correct_answers[index],incorrect_answers[index])));
                     setQuestionsLoading(false);
-                    setMarkedOptions(Array.from({length:10}));
+                    setMarkedOptions(Array.from({length:questions.length}).map(item=>"undefined"));
                 });
             }
         setQuestionsLoading(true);
@@ -54,29 +55,34 @@ const TitleCard = ({UUID})=>{
     useEffect(()=>{
         
         function addMarkedOptionsToRealTimeDatabase(){
-            const dbRef = ref(database, "users/"+UUID+"/"+date);
+            const dbRef = ref(database, "users/"+UUID+"/"+date+"/");
             update(dbRef,
                 {
-                    markedOptions:markedOptions.map(item=>item===undefined?"undefined":item)
+                    markedOptions:markedOptions.map((_, index)=>{
+                        if(index === currQuesIndex){
+                            return currSelectedOption;
+                        }
+                        return _;
+                    })
                 }
             )
         }
-        if(markedOptions !== null){
+        if(markedOptions !== null && currSelectedOption != null){
             console.log("markedOptions not equal to null")
             addMarkedOptionsToRealTimeDatabase();
         }
     }, [markedOptions]);
 
-    function updateToFireStore(questions, incorrect_answers, correct_answers){
-        const dbRef = ref(database, "users/"+UUID);
+    function updateToFireStore(questions, incorrect_answers, correct_answers, markedOptions){
+        const dbRef = ref(database, "users/"+UUID+"/"+date);
         update(dbRef,
             {
-                [date]:{questions:questions,
+                questions:questions,
                 correct_answers:correct_answers,
                 incorrect_answers:incorrect_answers,
                 category:findCategory(),
-                difficulty:difficultyLevel
-            }
+                difficulty:difficultyLevel,
+                markedOptions:markedOptions.map(option=>option===undefined?"undefined":option)
             }
             );
     } 
@@ -116,7 +122,7 @@ const TitleCard = ({UUID})=>{
                     <div className="md:grid md:grid-cols-2 md:grid-rows-3 md:justify-center md:items-start">
                         <Picture pictures={picture} pictureLoading={pictureLoading} currQuesIndex={currQuesIndex}></Picture>
                         <Question currQuesIndex={currQuesIndex} currQuestion={questions[currQuesIndex]}></Question>
-                        <Options currOptions={options[currQuesIndex]} markedOptions={markedOptions} quesIndex={currQuesIndex} setMarkedOptions={setMarkedOptions}></Options>
+                        <Options setCurrSelectedOption={setCurrSelectedOption} currOptions={options[currQuesIndex]} markedOptions={markedOptions} quesIndex={currQuesIndex} setMarkedOptions={setMarkedOptions}></Options>
                         <NextPrevBtn questionsLength={questions.length} currQuesIndex={currQuesIndex} setEndTest={setTimeUp} setCurrQuesIndex={setCurrQuesIndex}></NextPrevBtn>
                     </div>
                 </div>
