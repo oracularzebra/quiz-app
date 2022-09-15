@@ -128,7 +128,7 @@ const TitleCard = ({UUID})=>{
             }
             {
                 timeUp && 
-                <Result UUID={UUID} date={date}  ></Result>
+                <Result markedOptions={markedOptions} UUID={UUID} date={date}  ></Result>
             }
         </div>
     )
