@@ -1,3 +1,5 @@
+import React from "react";
+
 const Options = ({currOptions, setMarkedOptions,quesIndex, markedOptions, setCurrSelectedOption})=>{
 
      return (

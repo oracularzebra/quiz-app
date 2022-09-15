@@ -1,3 +1,5 @@
+import React from "react";
+
 const Picture = ({pictureLoading, pictures, currQuesIndex})=>{
 
     return (   

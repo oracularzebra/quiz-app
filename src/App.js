@@ -4,7 +4,7 @@ import Header from "./Components/header";
 import Home from "./Components/home";
 import TitleCard from "./Components/AbstractCard";
 import LoginPage from "./Components/LoginPage/login";
-import { useEffect, useState } from "react";
+import { useEffect, useState, React } from "react";
 import app from "./Components/firebaseIntegration";
 import { child, get, getDatabase, ref, set } from "firebase/database";
 function App() {

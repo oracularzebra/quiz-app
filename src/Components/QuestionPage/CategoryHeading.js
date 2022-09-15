@@ -1,3 +1,5 @@
+import React from "react";
+
 const CategoryAndDifficultyHeading = ({category, difficulty})=>{
 
     return(

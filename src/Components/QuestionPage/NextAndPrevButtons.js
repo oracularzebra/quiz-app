@@ -1,3 +1,4 @@
+import React from "react";
 const NextPrevBtn = ({currQuesIndex, setCurrQuesIndex, questionsLength, setEndTest})=>{
 
     return (

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, React } from "react";
 import titles from "./titles";
 
 const Home = ({UUID,category, difficulty,isLoggedIn, setCategory, setDifficulty})=>{
