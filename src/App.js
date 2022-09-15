@@ -49,7 +49,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage setUUID={setUUID} loggedIn={loggedIn} setIsNewUser={setIsNewUser}/>}></Route>
         <Route path="/home" element={<Home category={category} isLoggedIn={loggedIn} difficulty={difficulty} setCategory={setCategory} setDifficulty={setDifficulty} UUID={UUID}/>}></Route>
-        <Route path="home/:category/:difficultyLevel" element={<TitleCard isLoggedIn={loggedIn} UUID={UUID}/>}></Route>
+        <Route path="home/:category/:difficultyLevel" element={<TitleCard date={date} UUID={UUID}/>}></Route>
         <Route path="/*" element={<LoginPage setUUID={setUUID} loggedIn={loggedIn} setIsNewUser={setIsNewUser}/>}></Route>
       </Routes>
       <Footer/>
