@@ -7,7 +7,6 @@ import LoginPage from "./Components/LoginPage/login";
 import { useEffect, useState } from "react";
 import app from "./Components/firebaseIntegration";
 import { child, get, getDatabase, ref, set } from "firebase/database";
-
 function App() {
   
   const [UUID, setUUID] = useState(null);
@@ -44,16 +43,6 @@ function App() {
     }
   }, [UUID]);
 
-  useEffect(()=>{
-
-    function readUserData(db, userId){
-    
-    }
-    const db= getDatabase(app);
-    // if(loggedIn === true && UUID != null) writeUserData(db, UUID, )
-
-  }, [loggedIn]);
-  
   return (
     <div className="overflow-scroll">
       <Header/>
