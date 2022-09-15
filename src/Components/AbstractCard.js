@@ -27,7 +27,8 @@ const TitleCard = ({UUID})=>{
     const [score, setScore] = useState(0);
     const [options, setOptions] = useState(null);
     const [currCategory, setCurrCategory] = useState(null);
-    const date = new Date();
+    const [date, setDate] = useState(new Date());
+    const database = getDatabase(app);
 
     const nav = useNavigate();
     useEffect(()=>{
@@ -50,9 +51,23 @@ const TitleCard = ({UUID})=>{
         setPictureLoading(true);
         getQues();
     }, []);
+    useEffect(()=>{
+        
+        function addMarkedOptionsToRealTimeDatabase(){
+            const dbRef = ref(database, "users/"+UUID+"/"+date);
+            update(dbRef,
+                {
+                    markedOptions:markedOptions.map(item=>item===undefined?"undefined":item)
+                }
+            )
+        }
+        if(markedOptions !== null){
+            console.log("markedOptions not equal to null")
+            addMarkedOptionsToRealTimeDatabase();
+        }
+    }, [markedOptions]);
 
     function updateToFireStore(questions, incorrect_answers, correct_answers){
-        const database = getDatabase(app);
         const dbRef = ref(database, "users/"+UUID);
         update(dbRef,
             {
@@ -65,6 +80,7 @@ const TitleCard = ({UUID})=>{
             }
             );
     } 
+   
     function setPictures(questions){
         Promise.all((Array.from({length:questions.length}).map((_, index)=>{
             let pictures = getPhoto(decodeURIComponent(questions[index])); 
