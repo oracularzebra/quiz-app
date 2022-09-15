@@ -1,4 +1,4 @@
-const Options = ({currOptions, setMarkedOptions,quesIndex, markedOptions})=>{
+const Options = ({currOptions, setMarkedOptions,quesIndex, markedOptions, setCurrSelectedOption})=>{
 
      return (
         <div className="flex flex-col m-2 col-start-2 col-end-3 row-start-2 row-end-3">
@@ -7,6 +7,7 @@ const Options = ({currOptions, setMarkedOptions,quesIndex, markedOptions})=>{
                 <input type={"radio"} checked={markedOptions[quesIndex]===option?true:false} className="m-2 scale-110" onChange={(event)=>{
                     event.currentTarget.checked = true;
                     // console.log(markedOptions);
+                    setCurrSelectedOption(option);
                     const newMarkedOptions = markedOptions.map((_, index)=>{
                         if(index === quesIndex) return option;
                         return markedOptions[index];
