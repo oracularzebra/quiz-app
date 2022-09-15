@@ -24,7 +24,6 @@ const TitleCard = ({UUID})=>{
     const [pictureLoading, setPictureLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false);
     const [markedOptions, setMarkedOptions] = useState(null);
-    const [score, setScore] = useState(0);
     const [options, setOptions] = useState(null);
     const [currCategory, setCurrCategory] = useState(null);
     const [date, setDate] = useState(new Date());
@@ -129,7 +128,7 @@ const TitleCard = ({UUID})=>{
             }
             {
                 timeUp && 
-                <Result score={score} ></Result>
+                <Result UUID={UUID} date={date}  ></Result>
             }
         </div>
     )
