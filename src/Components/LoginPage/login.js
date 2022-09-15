@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState, React } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const LoginPage = ({setUUID,setIsNewUser, loggedIn})=>{
 

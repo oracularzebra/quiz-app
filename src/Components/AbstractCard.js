@@ -1,5 +1,6 @@
 import Counter from "./Counter";
-import { useEffect, useState, React } from "react";
+import { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import getPhoto from "./getPhotos";
 import getQuestions from "./getQuestionsIncorrectAnswersAndCorrectAnswer";
