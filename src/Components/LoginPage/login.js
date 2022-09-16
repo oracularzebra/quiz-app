@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import "./login.css";
+import {v4 as uuidv4, v4} from 'uuid';
 
 const LoginPage = ({setUUID,setIsNewUser, loggedIn})=>{
 
@@ -15,7 +17,7 @@ const LoginPage = ({setUUID,setIsNewUser, loggedIn})=>{
     }, [loggedIn])
     
     return(
-        <div className="grid bg-blue-100 h-screen w-screen">
+        <div className="login-page">
             <div className="bg-slate-300 rounded-md flex flex-col mt-40 mb-auto ml-auto mr-auto">
                 <h2 className="text-center pt-5">Enter your UUID</h2>
                 <form className="pb-5 grid pl-16 pr-16" onSubmit={(e)=>{e.preventDefault(); setUUID(enteredUUID);}}>
@@ -25,7 +27,10 @@ const LoginPage = ({setUUID,setIsNewUser, loggedIn})=>{
                     <button onClick={()=>ref.current.focus()} type={"submit"}>Submit</button>
                 </form>
                 {
-                <button className="pb-5" onClick={()=>{const newUUID = crypto.randomUUID(); setUUID(newUUID); setIsNewUser(true); nav("/home")}}>New User ?</button>
+                <button className="pb-5" onClick={()=>{
+                    const newUUID = uuidv4();
+                    // `${Math.floor(Math.random()+Math.random()+10*100*Math.random()+Math.random()+20*100*Math.random()*100)}`;
+                    setUUID(newUUID); setIsNewUser(true); nav("/home")}}>New User ?</button>
                 }
             </div>
         </div>
