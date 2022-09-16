@@ -24,3 +24,24 @@
     justify-content: center;
     font-size: x-large;
 }
+.question-no-header{
+    display: flex;
+    justify-content: space-around;
+}
+.question-no-header > button{
+    width: 2em;
+    height: 2em;
+    border: none;
+    margin: 1px;
+    display: grid;
+    place-content: center;
+    font-size: large;
+    color: white;
+    border-radius: 50%;
+}
+@media (min-width: 768px) {
+   .question-no-header > button{
+        width: 3em;
+        height: 3em;
+   } 
+}

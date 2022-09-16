@@ -1,12 +1,19 @@
 import React from "react";
+import '../abstractcard.css';
 
 const QuesNoHeader = ({questions, setCurrQuesIndex, currQuesIndex})=>{
 
     return (
-        <div className="flex justify-around">
+        <div className="question-no-header">
             {questions.map((_, index)=>{
                 return (
-                    <button key={index} onClick={()=>setCurrQuesIndex(index)} className={index === currQuesIndex?"bg-slate-500 w-15 md:w-10 md:h-10 text-white rounded-3xl p-2":"bg-slate-200 md:w-10 md:h-10 p-2 rounded-3xl"}>{index}</button>
+                    <button style={
+                        {
+                            backgroundColor:index === currQuesIndex?'lightgreen':'grey'
+                        }
+                    } key={index} onClick={(e)=>{
+                        setCurrQuesIndex(index);
+                    }} className="question-no-header">{index}</button>
                 )
             })}
         </div>
