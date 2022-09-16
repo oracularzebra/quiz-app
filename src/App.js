@@ -45,7 +45,7 @@ function App() {
   }, [UUID]);
 
   return (
-    <div className="overflow-scroll">
+    <div className="app">
       <Header/>
       <Routes>
         <Route path="/" element={<LoginPage setUUID={setUUID} loggedIn={loggedIn} setIsNewUser={setIsNewUser}/>}></Route>
