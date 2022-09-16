@@ -1,10 +1,11 @@
 import React from "react";
+import '../index.css';
 
 const Footer = ()=>{
 
     return (
-        <div className="bg-blue-500 order-3 w-screen">
-            <h1 className="text-xl text-center">Designed and Developed with ❤️ by Kartikey</h1>
+        <div className="footer">
+            <h2>Designed and Developed with ❤️ by <a href="https://github.com/oracularzebra">Kartikey</a></h2>
         </div>
     )
 
