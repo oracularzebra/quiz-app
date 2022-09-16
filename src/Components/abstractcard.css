@@ -1,7 +1,7 @@
 .abstract-class{
-    background-color: white;    
+    background-color: white; 
 }
-@media (width > 768px) {
+@media (min-width: 768px) {
    .abstract-class{
     width: 100%;
    } 
@@ -9,4 +9,13 @@
     margin-left: 20px;
     margin-right: 20px;
    }
+}
+.categoryAndDifficultyHeading{
+    text-align: center;
+    margin-top: 30px;
+}
+@media (min-width: 768px) {
+   .categoryAndDifficultyHeading{
+    font-size: x-large;
+   } 
 }
