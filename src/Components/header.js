@@ -1,14 +1,15 @@
 import React from "react";
+import "../index.css"
 
 const Header = ()=>{
 
     return (
-        <div className="bg-blue-500 w-screen rounded-b-md">
+        <div className="header">
             <header>
-                <h1 className="font-semibold text-center text-4xl">
+                <h1>
                     Quizee
                 </h1>
-                <p className="text-center">
+                <p>
                     An trivial knowledge assessment website
                 </p>
             </header>
