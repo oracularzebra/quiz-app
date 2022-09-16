@@ -1,4 +1,5 @@
-import { useState, useEffect, React } from "react";
+import { useState, useEffect } from "react";
+import React from "react";
 const Counter=({testTime, setEnd})=>{
 
     const [counter, setCounter] = useState(testTime);
