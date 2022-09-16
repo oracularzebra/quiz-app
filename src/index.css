@@ -1,3 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+*{
+    margin: 0;
+    font-family:  monospace;
+}
+
+.app{
+    overflow-y: scroll;
+}
+.header{
+    background-color: lightblue;
+    width: 100vw;
+    height: max-content;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.header > header > h1{
+    text-align: center;
+}
+.header > header > p{
+    text-align: center;
+    font-size: 1.5em;
+} 
