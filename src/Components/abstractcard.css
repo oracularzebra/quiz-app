@@ -19,3 +19,8 @@
     font-size: x-large;
    } 
 }
+.counter{
+    display: grid;
+    justify-content: center;
+    font-size: x-large;
+}

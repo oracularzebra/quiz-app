@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
+import './abstractcard.css';
+
 const Counter=({testTime, setEnd})=>{
 
     const [counter, setCounter] = useState(testTime);
@@ -24,7 +26,7 @@ const Counter=({testTime, setEnd})=>{
     });
 
     return (
-        <div className="grid justify-center font-semibold">
+        <div className="counter">
             {counter.min+":"+ counter.sec}
         </div>
     )
