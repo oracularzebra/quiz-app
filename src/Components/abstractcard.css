@@ -5,11 +5,14 @@
    .abstract-class{
     width: 100%;
    } 
-   .abstract-class > div{
-    margin-left: 20px;
-    margin-right: 20px;
+   .abstract-class > div > div:nth-child(6){
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 2;
+    justify-content: center;
    }
 }
+
 .categoryAndDifficultyHeading{
     text-align: center;
     margin-top: 30px;
@@ -44,4 +47,66 @@
         width: 3em;
         height: 3em;
    } 
+}
+.picture{
+    border: 2px solid black;
+    border-radius: 10px;
+    grid-column-start: 1;
+    margin:auto;
+    width: 300px;
+    height: 300px;
+    background: contain;
+    display: grid;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    grid-column-end: 2;
+    grid-row-start:1;
+    grid-row-end: 4;
+}
+@media (min-width: 768px) {
+   .picture{
+    width: 400px;
+    height: 400px;
+   } 
+}
+.question{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin: 20px;
+    font-size: large;
+}
+.options{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.options > label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.options > label > input{
+    scale: 110%;
+}
+.options > button{
+    font-weight: bold;
+}
+.next-finish-prev-btn{
+    display: flex;
+    padding: 30px;
+}
+.next-finish-prev-btn > button:first-child{
+    width: 100%;
+}
+.next-finish-prev-btn > button:last-child{
+    width: 100%;
+}
+.next-finish-prev-btn > button:nth-child(2){
+    width: 100%;
+    font-weight: bold;
 }
