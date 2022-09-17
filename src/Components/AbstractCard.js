@@ -132,7 +132,7 @@ const TitleCard = ({UUID})=>{
             }
             {
                 timeUp && 
-                <Result options={options} questions={questions} markedOptions={markedOptions} UUID={UUID} date={date}  ></Result>
+                <Result category={currCategory} difficulty={difficultyLevel}  options={options} questions={questions} markedOptions={markedOptions} UUID={UUID} date={date}  ></Result>
             }
         </div>
     )
