@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import app from "./Components/firebaseIntegration";
 import { child, get, getDatabase, ref, set } from "firebase/database";
+import History from "./Components/HistoryPage/History";
 function App() {
   
   const [UUID, setUUID] = useState(JSON.parse(localStorage.getItem("UUID")));
@@ -51,6 +52,7 @@ function App() {
         <Route path="/" element={<LoginPage setUUID={setUUID} loggedIn={loggedIn} setIsNewUser={setIsNewUser}/>}></Route>
         <Route path="/home" element={<Home category={category} isLoggedIn={loggedIn} difficulty={difficulty} setCategory={setCategory} setDifficulty={setDifficulty} UUID={UUID}/>}></Route>
         <Route path="home/:category/:difficultyLevel" element={<TitleCard UUID={UUID}/>}></Route>
+        <Route path="/history" element={<History UUID={UUID}></History>}></Route>
         <Route path="/*" element={<LoginPage setUUID={setUUID} loggedIn={loggedIn} setIsNewUser={setIsNewUser}/>}></Route>
       </Routes>
       <Footer/>
