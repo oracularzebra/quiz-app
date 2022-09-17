@@ -5,7 +5,7 @@ import app from "../firebaseIntegration";
 import '../abstractcard.css';
 import OneQuesResult from "./OneQuesResult";
 
-const Result = ({UUID, date, options,markedOptions, questions})=>{
+const Result = ({UUID, date, options, category, difficulty,markedOptions, questions})=>{
 
     const [correct_answers, setCorrectAnswers] = useState(null);
 
@@ -31,7 +31,7 @@ const Result = ({UUID, date, options,markedOptions, questions})=>{
     }, []);
     return(
         <div className="result-page">
-            <h3>Your Score is:{score+"/"+10}</h3>
+            <h3>Your Score is:{score+"/"+10} in {category}:{difficulty}</h3>
             <div>
                 {Array.from({length:questions.length}).map((_, index)=>{
                     return (
