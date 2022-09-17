@@ -3,6 +3,8 @@ import React from "react"
 import getAttempts from "./getDateWiseAttempts";
 import Result from "../ResultPage/Results";
 import { Link } from "react-router-dom";
+import { Box, Tab, Tabs } from "@mui/material";
+import TabPanel, { a11yProps } from "./TabPanel";
 
 const History = ({UUID})=>{
 
@@ -11,7 +13,7 @@ const History = ({UUID})=>{
     const [obj, setObj] = useState(null);
     const [value, setValue] = useState(0);
 
-    const handleChange = (evet, newValue)=>{
+    const handleChange = (event, newValue)=>{
         setValue(newValue);
     }
     useEffect(()=>{
@@ -36,24 +38,24 @@ const History = ({UUID})=>{
 
     return (
         !fetcing &&
-        <div className="history"
-            role={"tabpanel"}
-        >
+        <div>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={value} variant="scrollable" scrollButtons="auto" onChange={handleChange} aria-label="scrollable auto tabs example">
+                    {dates.map((_,index)=>{
+                        return (
+                        <Tab label={_}/>
+                        )
+                    })}
+                </Tabs>
+            </Box>
             {dates.map((_, index)=>{
                 return(
-                    <div key={index}
-                        hidden={index !== 1}
-                    >
-                        <input name="tabs" type={"radio"} id={`tab${index}`}/>
-                        <label>{JSON.stringify(_)}</label>
-                        <div>
-                            <Result UUID={UUID} options={Array.from({length:obj[_].correct_answers.length}).map((__,index)=>insertAtRandom(obj[_].correct_answers[index],obj[_].incorrect_answers[index]))} category={obj[_].category} difficulty={obj[_].difficulty} questions={obj[_].questions} date={_} markedOptions={obj[_].markedOptions}></Result>
-                        </div>
-                        
-                    </div>
+                    <TabPanel value={value} index={index} children={<Result UUID={UUID} options={Array.from({length:obj[_].correct_answers.length}).map((__,index)=>insertAtRandom(obj[_].correct_answers[index],obj[_].incorrect_answers[index]))} category={obj[_].category} difficulty={obj[_].difficulty} questions={obj[_].questions} date={_} markedOptions={obj[_].markedOptions}></Result>}></TabPanel>
                 )
             })}
         </div>
+        
+        
     )
 }
 export default History;
