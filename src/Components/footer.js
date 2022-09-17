@@ -5,7 +5,7 @@ const Footer = ()=>{
 
     return (
         <div className="footer">
-            <h2>Designed and Developed with ❤️ by <a href="https://github.com/oracularzebra">Kartikey</a></h2>
+            <h2>Designed and Developed with <span aria-label="heart" role={"img"}>❤️</span> by <a href="https://github.com/oracularzebra">Kartikey</a></h2>
         </div>
     )
 
