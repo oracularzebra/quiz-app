@@ -20,7 +20,7 @@ const Options = ({currOptions, setMarkedOptions,quesIndex, markedOptions, setCur
                 }}/>{option}
                 </label>
             ))}
-            <button className="font-semibold" onClick={()=>setMarkedOptions([...markedOptions.slice(0, quesIndex), "undefined", ...markedOptions.slice(quesIndex+1)])}>Reset</button>
+            <button onClick={()=>setMarkedOptions([...markedOptions.slice(0, quesIndex), "undefined", ...markedOptions.slice(quesIndex+1)])}>Reset</button>
         </div>
     )
 }
