@@ -12,7 +12,7 @@ const Counter=({testTime, setEnd})=>{
             //show the result
             setEnd(true);
         }
-        else if(counter.sec == 0){
+        else if(counter.sec === 0){
             setCounter({min:counter.min-1, sec:59});
         }
         else{

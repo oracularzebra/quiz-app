@@ -122,7 +122,7 @@ const TitleCard = ({UUID})=>{
                     <Counter setEnd={setTimeUp} testTime={{min:10, sec:0}}></Counter>
                     <QuesNoHeader questions={questions} setCurrQuesIndex={setCurrQuesIndex} currQuesIndex={currQuesIndex}></QuesNoHeader>
                     <hr></hr>
-                    <div className="md:grid md:grid-cols-2 md:grid-rows-3 md:justify-center md:items-start">
+                    <div>
                         <Picture pictures={picture} pictureLoading={pictureLoading} currQuesIndex={currQuesIndex}></Picture>
                         <Question currQuesIndex={currQuesIndex} currQuestion={questions[currQuesIndex]}></Question>
                         <Options setCurrSelectedOption={setCurrSelectedOption} currOptions={options[currQuesIndex]} markedOptions={markedOptions} quesIndex={currQuesIndex} setMarkedOptions={setMarkedOptions}></Options>
@@ -132,7 +132,7 @@ const TitleCard = ({UUID})=>{
             }
             {
                 timeUp && 
-                <Result markedOptions={markedOptions} UUID={UUID} date={date}  ></Result>
+                <Result options={options} questions={questions} markedOptions={markedOptions} UUID={UUID} date={date}  ></Result>
             }
         </div>
     )
