@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import React from "react";
 import titles from "./titles";
@@ -67,6 +67,9 @@ const Home = ({UUID,category, difficulty,isLoggedIn, setCategory, setDifficulty}
                 </div>
             ))
         }
+        <div>
+            <Link to={'/history'} style={{textAlign:"center", display:"grid", color:"black", textDecoration:"none"}}>See privious attempts</Link>
+        </div>
     </div>
     </div>
     )
