@@ -95,6 +95,7 @@
 }
 .options > button{
     font-weight: bold;
+    padding: 5px;
 }
 .next-finish-prev-btn{
     display: flex;
@@ -102,6 +103,7 @@
 }
 .next-finish-prev-btn > button:first-child{
     width: 100%;
+    padding: 5px;
 }
 .next-finish-prev-btn > button:last-child{
     width: 100%;
@@ -109,4 +111,27 @@
 .next-finish-prev-btn > button:nth-child(2){
     width: 100%;
     font-weight: bold;
+}
+.result-page{
+    display: grid;
+}
+.result-page > h3{
+    font-size: x-large;
+    margin: 3px;
+    text-align: center;
+}
+.result-page > div{
+    display: grid;
+}
+.OneQuesResult{
+    display: grid;
+}
+.OneQuesResult > h2{
+    font-size: larger;
+}
+.OneQuesResult > div{
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+    justify-content: space-between;
 }
