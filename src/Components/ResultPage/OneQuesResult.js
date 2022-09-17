@@ -3,7 +3,6 @@ import '../abstractcard.css';
 
 const OneQuesResult = ({quesIndex, question, correct_answer, options, markedOption})=>{
 
-    console.log(options);
     return (
         <div className="OneQuesResult">
             <h2>{"Q"+quesIndex+" "+question}</h2>

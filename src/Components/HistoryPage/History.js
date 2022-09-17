@@ -23,8 +23,6 @@ const History = ({UUID})=>{
             //Here we are setting the dates
             const dates = Object.keys(obj).slice(0, Object.keys(obj).length-1);
             setObj(obj);
-            console.log(obj);
-            console.log(dates);
             setDates(dates); 
             setFetching(false);
         });
@@ -43,14 +41,14 @@ const History = ({UUID})=>{
                 <Tabs value={value} variant="scrollable" scrollButtons="auto" onChange={handleChange} aria-label="scrollable auto tabs example">
                     {dates.map((_,index)=>{
                         return (
-                        <Tab label={_}/>
+                        <Tab key={index} label={_}/>
                         )
                     })}
                 </Tabs>
             </Box>
             {dates.map((_, index)=>{
                 return(
-                    <TabPanel value={value} index={index} children={<Result UUID={UUID} options={Array.from({length:obj[_].correct_answers.length}).map((__,index)=>insertAtRandom(obj[_].correct_answers[index],obj[_].incorrect_answers[index]))} category={obj[_].category} difficulty={obj[_].difficulty} questions={obj[_].questions} date={_} markedOptions={obj[_].markedOptions}></Result>}></TabPanel>
+                    <TabPanel key={index} value={value} index={index} children={<Result UUID={UUID} options={Array.from({length:obj[_].correct_answers.length}).map((__,index)=>insertAtRandom(obj[_].correct_answers[index],obj[_].incorrect_answers[index]))} category={obj[_].category} difficulty={obj[_].difficulty} questions={obj[_].questions} date={_} markedOptions={obj[_].markedOptions}></Result>}></TabPanel>
                 )
             })}
         </div>
