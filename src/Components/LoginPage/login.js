@@ -24,11 +24,15 @@ const LoginPage = ({setUUID,setIsNewUser, loggedIn})=>{
                     <label>
                         <input ref={ref} required autoFocus className="bg-slate-400 rounded-sm border-none" type={"text"} onChange={(e)=>setEnteredUUID(e.currentTarget.value)}/>
                     </label>
-                    <button onClick={()=>ref.current.focus()} type={"submit"}>Submit</button>
+                    <button onClick={()=>{
+                        ref.current.focus();
+                        localStorage.setItem("UUID", JSON.stringify(enteredUUID))
+                    }} type={"submit"}>Submit</button>
                 </form>
                 {
                 <button className="pb-5" onClick={()=>{
                     const newUUID = uuidv4();
+                    localStorage.setItem("UUID", JSON.stringify(newUUID));
                     // `${Math.floor(Math.random()+Math.random()+10*100*Math.random()+Math.random()+20*100*Math.random()*100)}`;
                     setUUID(newUUID); setIsNewUser(true); nav("/home")}}>New User ?</button>
                 }

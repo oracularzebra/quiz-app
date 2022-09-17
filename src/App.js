@@ -10,7 +10,7 @@ import app from "./Components/firebaseIntegration";
 import { child, get, getDatabase, ref, set } from "firebase/database";
 function App() {
   
-  const [UUID, setUUID] = useState(null);
+  const [UUID, setUUID] = useState(JSON.parse(localStorage.getItem("UUID")));
   const [isNewUser, setIsNewUser] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [category, setCategory] = useState(null);
