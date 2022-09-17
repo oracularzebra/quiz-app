@@ -14,8 +14,10 @@
     width: 100vw;
     height: max-content;
 }
-.header > header > h1{
+.header > header  a{
     text-align: center;
+    text-decoration: none;
+    color:black;
 }
 .header > header > p{
     text-align: center;
