@@ -1,3 +1,101 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+*{
+    margin: 0;
+    font-family:  monospace;
+}
+
+.app{
+    overflow-y: scroll;
+    display: grid;
+    min-height: 100vh;
+    align-content: space-between;
+}
+.header{
+    background-color: lightblue;
+    width: 100vw;
+    height: max-content;
+}
+.header > header > h1{
+    text-align: center;
+}
+.header > header > p{
+    text-align: center;
+    font-size: 1.5em;
+} 
+.footer{
+    background-color: lightblue;
+    order: 3;
+    width: 100vw;
+}
+.footer > h2{
+    text-align: center;
+}
+.footer > h2 > a{
+    text-decoration: none;
+    color: black;
+}
+.homePage > h2{
+    text-align: center;
+}
+.homePage > div{
+    background-color: rgb(214, 228, 241);
+    border-radius: 10px;
+    order:2;
+    margin: 14px;
+    display:grid;
+    height: max-content;
+    box-shadow: 4px 3px black;
+}
+@media (min-width: 768px) {
+    .homePage > div{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+    }
+}
+/* These are for titles */
+.homePage > div > div{
+    border-radius: 5px;
+    margin: 10px;
+    box-shadow: 2px 2px 2px black;
+}
+@media (min-width: 768px) {
+    .homePage > div > div{
+        padding: 20px;
+    }
+}
+/* Here too we are editing the categories */
+.homePage > div > div > h1{
+    font-size: x-large;
+    text-align: center;
+}
+.homePage > div > div > div:first-child{
+    display: grid;
+}
+/* Here we are editing the categories */
+.homePage > div > div > div:first-child > h1{
+    font-size: x-large;
+    text-align: center;
+}
+/* Here we are editing the subcategories */
+.homePage > div > div > div:first-child > div{
+    display: grid;
+    font-size: large;
+}
+.homePage > div > div > div:first-child
+.homePage > div > div > div:nth-child(2){
+    display: grid;
+}
+.homePage > div > div > div:nth-child(2) > h1{
+    font-size: larger;
+}
+.homePage > div > div > div:nth-child(2) > div{
+    display: flex;
+}
+.homePage > div > div > div:nth-child(2) > div > label{
+    margin: 10px;
+    font-size: large;
+}
+.homePage > div > div > div:nth-child(3) > button{
+    padding: 2px;
+}

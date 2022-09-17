@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import React from "react";
 import titles from "./titles";
+import '../index.css';
 
 const Home = ({UUID,category, difficulty,isLoggedIn, setCategory, setDifficulty})=>{
 

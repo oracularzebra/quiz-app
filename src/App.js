@@ -10,7 +10,7 @@ import app from "./Components/firebaseIntegration";
 import { child, get, getDatabase, ref, set } from "firebase/database";
 function App() {
   
-  const [UUID, setUUID] = useState(null);
+  const [UUID, setUUID] = useState(JSON.parse(localStorage.getItem("UUID")));
   const [isNewUser, setIsNewUser] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [category, setCategory] = useState(null);
@@ -45,7 +45,7 @@ function App() {
   }, [UUID]);
 
   return (
-    <div className="overflow-scroll">
+    <div className="app">
       <Header/>
       <Routes>
         <Route path="/" element={<LoginPage setUUID={setUUID} loggedIn={loggedIn} setIsNewUser={setIsNewUser}/>}></Route>
