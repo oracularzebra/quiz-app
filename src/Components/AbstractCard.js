@@ -89,9 +89,9 @@ const TitleCard = ({UUID})=>{
    
     function setPictures(questions){
         Promise.all((Array.from({length:questions.length}).map((_, index)=>{
-            let pictures = getPhoto(decodeURIComponent(questions[index])); 
+            let pictures = getPhoto(questions[index]); 
             return pictures;
-        }))).then((pictures)=>{console.log(pictures); setPictureLoading(false); setPicture(pictures)});
+        }))).then((pictures)=>{setPictureLoading(false); setPicture(pictures)});
     }
     function insertAtRandom(data, arr=[]){
         let length = arr.length;
@@ -108,12 +108,15 @@ const TitleCard = ({UUID})=>{
                 }
             }
             else if(titles[i].category.toString() === category) { setCurrCategory(titles[i].itemName); return titles[i].itemName;}
+            else{
+                return "undefined";
+            }
         }
     }
     return (
-        <div className="bg-white sm:h-full">
+        <div className="abstract-class">
             {!questionsLoading && !timeUp && 
-                <div className="md:ml-20 md:mr-20">
+                <div>
                     <CategoryAndDifficultyHeading category={currCategory} difficulty={difficultyLevel}></CategoryAndDifficultyHeading>
                     <hr></hr>
                     <Counter setEnd={setTimeUp} testTime={{min:10, sec:0}}></Counter>
