@@ -7,15 +7,18 @@ All the login credentials, along with the attempts are saved in *firebase*.
 While making this project I learned about the firebase integration with the webapp.
 Along with that I learned various react best practices.
 
-## How to get started
-Developers can see pull the project and get started by viewing the App.js file. 
-All the components like home page, question page, result page is saved in the component folder.
+## How it works
+When visiting the website, the user is asked for the credentials, a single uuid is required
+for logging in. If its his/her first time, they can create a new uuid which will be saved in the firebase 
+realtime database and on the local storage of the user machine, saving the time for memorinzing the 
+long uuid. As the user attempts the tests, the result is saveed along with the date.
 
-## For non-developers 
-The best place to learn react is [Here](https://beta.reactjs.org/)
+## Technologies used
+* Firebase
+* ReactJs
 
-    What the project does
+<!--     What the project does
     Why the project is useful
     How users can get started with the project
     Where users can get help with your project
-    Who maintains and contributes to the project
+    Who maintains and contributes to the project -->
