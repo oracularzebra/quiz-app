@@ -1,11 +1,11 @@
-.abstract-class{
+.abstract-card{
     background-color: white; 
 }
 @media (min-width: 768px) {
-   .abstract-class{
+   .abstract-card{
     width: 100%;
    } 
-   .abstract-class > div > div:nth-child(6){
+   .abstract-card > div > div:nth-child(6){
     display: grid;
     grid-template-columns: 2;
     grid-template-rows: 2;
@@ -74,8 +74,19 @@
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
-    margin: 20px;
+    margin-top: 20px;
     font-size: large;
+}
+@media (min-width: 768px) {
+    .question{
+        word-wrap: break-word;
+        min-width: 500px;
+        max-width: 500px;
+    }
+    .options{
+        min-height: fit-content;
+        max-height: 200px;
+    }
 }
 .options{
     display: flex;

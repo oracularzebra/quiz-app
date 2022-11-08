@@ -114,7 +114,7 @@ const TitleCard = ({UUID})=>{
         }
     }
     return (
-        <div className="abstract-class">
+        <div className="abstract-card">
             {!questionsLoading && !timeUp && 
                 <div>
                     <CategoryAndDifficultyHeading category={currCategory} difficulty={difficultyLevel}></CategoryAndDifficultyHeading>
